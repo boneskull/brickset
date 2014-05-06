@@ -1,0 +1,41 @@
+{
+  "name": "node-brickset",
+  "version": "0.1.0",
+  "description": "NodeJS adapter to Brickset API",
+  "main": "lib/brickset.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boneskull/node-brickset"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "lego",
+    "brickset",
+    "brickset.com"
+  ],
+  "author": "Christopher Hiller <chiller@badwing.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/boneskull/node-brickset/issues"
+  },
+  "homepage": "https://github.com/boneskull/node-brickset",
+  "dependencies": {
+    "soap": "^0.4.4",
+    "q": "^1.0.1",
+    "lodash-node": "^2.4.1",
+    "request": "^2.34.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-simple-mocha": "^0.4.0",
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "sinon": "^1.9.1",
+    "sinon-chai": "^2.5.0",
+    "load-grunt-tasks": "^0.4.0"
+  }
+}
