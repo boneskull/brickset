@@ -19,5 +19,6 @@
     "sinon": true
   },
   "indent": 2,
-  "expr": true
+  "expr": true,
+  "newcap": false
 }
