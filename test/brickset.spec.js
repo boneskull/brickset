@@ -7,46 +7,76 @@ var brickset = require('../lib/brickset.js'),
 
 describe('brickset adapter', function() {
 
-  var bs;
+  var api_key = '12345',
+    sandbox,
+    wsdl_path = path.resolve(__dirname + '/brickset.wsdl');
 
   beforeEach(function () {
-    config.brickset.API_URL = path.resolve(__dirname + '/brickset.wsdl.xml');
-
-    bs = brickset({api_key: '12345'});
+    sandbox = sinon.sandbox.create();
   });
 
-  it('should throw if no api key', function () {
-    expect(brickset).to.throw;
+  afterEach(function () {
+    sandbox.restore();
   });
 
-  it('should have options', function () {
-    expect(bs.opts).to.deep.equal({
-      api_key: '12345',
-      username: undefined,
-      password: undefined
+  describe('constructor', function () {
+    it('should throw if no api key', function () {
+      expect(brickset).to.throw(Error, config.errors.NO_API_KEY);
+    });
+
+    it('should have options', function () {
+      var bs = brickset({api_key: api_key, url: wsdl_path});
+      expect(bs._opts).to.deep.equal({
+        api_key: '12345',
+        username: undefined,
+        password: undefined,
+        cache: true,
+        url: wsdl_path
+      });
     });
   });
 
-  it('should fail if invalid local wsdl', function () {
-    config.brickset.API_URL = path.resolve(__dirname + '/bad.wsdl.xml');
-    expect(function () {
-      brickset({api_key: '12345'});
-    }).to.throw;
+  describe('_connect', function () {
+
+    var stub_writeCache;
+
+    beforeEach(function () {
+        stub_writeCache = sandbox.stub(brickset.Brickset.prototype, '_writeCache');
+    });
+
+    it('should fail if invalid local wsdl', function (done) {
+      var bs = brickset({api_key: api_key, url: path.resolve(__dirname +
+        '/bad.wsdl')});
+      bs.client
+        .then(function () {
+          expect(true).to.be.false;
+        }, function (err) {
+          expect(err).to.equal(config.errors.BAD_WSDL);
+        })
+        .finally(done);
+
+    });
+
+    it('should fail if invalid remote wsdl', function (done) {
+      var bs = brickset({api_key: api_key, url: 'http://whitehouse.gov'});
+      bs.client
+        .then(function () {
+          expect(true).to.be.false;
+        }, function (err) {
+          expect(err).to.equal(config.errors.BAD_WSDL);
+        })
+        .finally(done);
+    });
+
+    it('should create a client', function (done) {
+      var bs = brickset({api_key: api_key});
+      bs.client
+        .done(function () {
+          expect(bs.client.describe).to.be.a('function');
+          done();
+        }, done);
+
+    });
   });
 
-  it('should fail if invalid remote wsdl', function () {
-    config.brickset.API_URL = 'http://whitehouse.gov';
-    expect(function () {
-      brickset({api_key: '12345'});
-    }).to.throw;
-  });
-
-  it('should create a client', function (done) {
-    bs.client
-      .done(function () {
-        expect(bs.client.describe).to.be.a('function');
-        done();
-      }, done);
-
-  });
 });

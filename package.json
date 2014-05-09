@@ -2,9 +2,9 @@
   "name": "node-brickset",
   "version": "0.1.0",
   "description": "NodeJS adapter to Brickset API",
-  "main": "lib/brickset.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -24,18 +24,20 @@
   },
   "homepage": "https://github.com/boneskull/node-brickset",
   "dependencies": {
-    "soap": "^0.4.4",
+    "soap": "git://github.com/boneskull/node-soap.git",
     "q": "^1.0.1",
     "lodash-node": "^2.4.1",
     "request": "^2.34.0"
   },
   "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-bump": "0.0.13",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-simple-mocha": "^0.4.0",
-    "grunt": "^0.4.4",
-    "grunt-contrib-jshint": "^0.10.0",
-    "sinon": "^1.9.1",
+    "load-grunt-tasks": "^0.4.0",
     "sinon-chai": "^2.5.0",
-    "load-grunt-tasks": "^0.4.0"
+    "time-grunt": "^0.3.1"
   }
 }

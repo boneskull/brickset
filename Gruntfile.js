@@ -1,5 +1,9 @@
+'use strict';
+
 module.exports = function (grunt) {
-  'use strict';
+
+  require('time-grunt')(grunt);
+
   // Project configuration
   grunt.initConfig({
     // Metadata
@@ -51,5 +55,7 @@ module.exports = function (grunt) {
 
   // Default task
   grunt.registerTask('default', ['jshint', 'simplemocha']);
+  grunt.registerTask('test', ['default']);
+  grunt.registerTask('develop', ['default', 'watch']);
 };
 

@@ -6,7 +6,7 @@ var soap = require('../lib/soap'),
   http = require('http'),
   format = require('util').format,
 
-  WSDL_FILEPATH = path.resolve(__dirname + '/test.wsdl.xml'),
+  WSDL_FILEPATH = path.resolve(__dirname + '/test.wsdl'),
 
   PORT = 31337,
   url = format('http://localhost:%d/wsdl?wsdl', PORT),
