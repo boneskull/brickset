@@ -19,14 +19,19 @@ describe('brickset adapter', function() {
     sandbox.restore();
   });
 
-  describe('constructor', function () {
+  describe('brickset()', function () {
+
+    beforeEach(function() {
+      sandbox.stub(brickset, '_connect').returnsArg(0);
+    });
+
     it('should throw if no api key', function () {
       expect(brickset).to.throw(Error, config.errors.NO_API_KEY);
     });
 
     it('should have options', function () {
-      var bs = brickset({api_key: api_key, url: wsdl_path});
-      expect(bs._opts).to.deep.equal({
+      var opts = brickset({api_key: api_key, url: wsdl_path});
+      expect(opts).to.deep.equal({
         api_key: '12345',
         username: undefined,
         password: undefined,
@@ -41,13 +46,12 @@ describe('brickset adapter', function() {
     var stub_writeCache;
 
     beforeEach(function () {
-        stub_writeCache = sandbox.stub(brickset.Brickset.prototype, '_writeCache');
+        stub_writeCache = sandbox.stub(brickset, '_writeCache');
     });
 
     it('should fail if invalid local wsdl', function (done) {
-      var bs = brickset({api_key: api_key, url: path.resolve(__dirname +
-        '/bad.wsdl')});
-      bs.client
+      brickset({api_key: api_key, url: path.resolve(__dirname +
+        '/bad.wsdl')})
         .then(function () {
           expect(true).to.be.false;
         }, function (err) {
@@ -58,8 +62,7 @@ describe('brickset adapter', function() {
     });
 
     it('should fail if invalid remote wsdl', function (done) {
-      var bs = brickset({api_key: api_key, url: 'http://whitehouse.gov'});
-      bs.client
+      brickset({api_key: api_key, url: 'http://whitehouse.gov'})
         .then(function () {
           expect(true).to.be.false;
         }, function (err) {
@@ -69,10 +72,9 @@ describe('brickset adapter', function() {
     });
 
     it('should create a client', function (done) {
-      var bs = brickset({api_key: api_key});
-      bs.client
-        .done(function () {
-          expect(bs.client.describe).to.be.a('function');
+      brickset({api_key: api_key, url: wsdl_path})
+        .then(function (client) {
+          expect(client.client.describe).to.be.a('function');
           done();
         }, done);
 
