@@ -72,9 +72,10 @@ describe('brickset adapter', function() {
     });
 
     it('should create a client', function (done) {
+      var BricksetClient = require('../lib/client');
       brickset({api_key: api_key, url: wsdl_path})
-        .then(function (client) {
-          expect(client.client.describe).to.be.a('function');
+        .then(function (bs) {
+          expect(bs).to.be.an.instanceof(BricksetClient);
           done();
         }, done);
 
