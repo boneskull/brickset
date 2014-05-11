@@ -21,7 +21,7 @@ methods are generated automatically.
 module**; get one [here](http://brickset.com/tools/webservices/requestkey).
 Many functions also require a Brickset user name and password.  It's
 recommended to store these in the environment variables `BRICKSET_API_KEY`,
-`BRICKSET_USERNAME`, and `BRICKSET_PASSWORD`, respecitvely.
+`BRICKSET_USERNAME`, and `BRICKSET_PASSWORD`, respectively.
 
 > **Passwords are sent in plaintext; Brickset does not provide `https`.  Use
 a unique password!**
