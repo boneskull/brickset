@@ -1,5 +1,5 @@
 {
-  "name": "node-brickset",
+  "name": "brickset",
   "version": "0.1.0",
   "description": "NodeJS adapter to Brickset API",
   "main": "index.js",
