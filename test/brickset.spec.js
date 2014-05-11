@@ -49,36 +49,32 @@ describe('brickset adapter', function() {
         stub_writeCache = sandbox.stub(brickset, '_writeCache');
     });
 
-    it('should fail if invalid local wsdl', function (done) {
-      brickset({api_key: api_key, url: path.resolve(__dirname +
-        '/bad.wsdl')})
-        .then(function () {
-          expect(true).to.be.false;
-        }, function (err) {
-          expect(err).to.equal(config.errors.BAD_WSDL);
-        })
-        .finally(done);
-
+    it('should fail if invalid local wsdl', function () {
+      return expect(brickset({api_key: api_key, url: path.resolve(__dirname +
+        '/bad.wsdl')})).to.eventually.be.rejectedWith(config.errors.BAD_WSDL);
     });
 
-    it('should fail if invalid remote wsdl', function (done) {
-      brickset({api_key: api_key, url: 'http://whitehouse.gov'})
-        .then(function () {
-          expect(true).to.be.false;
-        }, function (err) {
-          expect(err).to.equal(config.errors.BAD_WSDL);
-        })
-        .finally(done);
+    it('should fail if invalid remote wsdl', function () {
+      return expect(brickset({api_key: api_key, url: 'http://whitehouse.gov'}))
+        .to.eventually.be.rejectedWith(config.errors.BAD_WSDL);
     });
 
-    it('should create a client', function (done) {
+    it('should create a client', function () {
       var BricksetClient = require('../lib/client');
-      brickset({api_key: api_key, url: wsdl_path})
+      expect(brickset({api_key: api_key, url: wsdl_path}))
+        .to.eventually.be.fulfilled
         .then(function (bs) {
           expect(bs).to.be.an.instanceof(BricksetClient);
-          done();
-        }, done);
+        });
+    });
 
+    it('should provide node-style callback API', function (done) {
+      var callback = function (err, res) {
+        expect(err).to.be.null;
+        expect(res).to.be.defined;
+        done();
+      };
+      brickset({api_key: api_key, url: wsdl_path}, callback);
     });
   });
 
