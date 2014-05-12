@@ -24,9 +24,6 @@ module.exports = function (grunt) {
         src: ['lib/**/*.js', 'test/**/*.js']
       }
     },
-    qunit: {
-      files: ['test/**/*.html']
-    },
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
