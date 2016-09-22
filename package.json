@@ -17,28 +17,31 @@
     "brickset",
     "brickset.com"
   ],
-  "author": "Christopher Hiller <chiller@badwing.com>",
+  "author": "Christopher Hiller <boneskull@boneskull.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/boneskull/node-brickset/issues"
   },
   "homepage": "https://github.com/boneskull/node-brickset",
   "dependencies": {
-    "soap": "git://github.com/boneskull/node-soap.git",
+    "lodash": "^4.16.1",
     "q": "^1.0.1",
-    "lodash-node": "^2.4.1",
-    "request": "^2.34.0"
+    "request": "^2.34.0",
+    "soap": "^0.17.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "grunt": "^0.4.4",
     "grunt-bump": "0.0.13",
     "grunt-cli": "^0.1.13",
-    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-simple-mocha": "^0.4.0",
     "load-grunt-tasks": "^0.4.0",
-    "sinon-chai": "^2.5.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
     "time-grunt": "^0.3.1",
-    "chai-as-promised": "^4.1.1"
+    "updtr": "^0.2.1"
   }
 }

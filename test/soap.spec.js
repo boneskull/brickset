@@ -1,7 +1,7 @@
 'use strict';
 
 var soap = require('../lib/soap'),
-  _ = require('lodash-node'),
+  _ = require('lodash'),
   path = require('path'),
   http = require('http'),
   format = require('util').format,

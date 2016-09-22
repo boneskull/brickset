@@ -2,7 +2,8 @@
 
 var BricksetClient = require('../lib/client'),
   Q = require('q'),
-  config = require('../lib/config');
+  config = require('../lib/config'),
+  _ = require('lodash');
 
 describe('BricksetClient', function () {
 
@@ -60,7 +61,7 @@ describe('BricksetClient', function () {
         }
       };
       sandbox.spy(BricksetClient, '_reset');
-      BricksetClient._buildPrototype.cache = {};
+      BricksetClient._buildPrototype = _.memoize(BricksetClient.__buildPrototype);
       bs = BricksetClient.create(client, params);
     });
 
