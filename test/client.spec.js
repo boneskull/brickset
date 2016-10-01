@@ -56,7 +56,7 @@ describe('BricksetClient', function () {
           port: {
             foo: sandbox.stub().returns(Q(true)),
             bar: sandbox.stub().returns(Q(true)),
-            login: sandbox.stub().returns(Q(user_hash))
+            login: sandbox.stub().returns(Q({loginResult : user_hash}))
           }
         }
       };
