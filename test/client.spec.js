@@ -103,6 +103,15 @@ describe('BricksetClient', function () {
           .to.eventually.be.rejectedWith(config.errors.NO_USERNAME_OR_PASSWORD);
       });
 
+    it('should omit login if userHash defined even if API function requires auth',
+      function () {
+        return expect(bs.bar({userHash: null}))
+            .to.eventually.become(true)
+            .then(function () {
+              expect(client.service.port.login).to.have.been.not.called;
+            });
+      });
+
     it('should attempt login if API function requires auth',
       function () {
         return expect(bs.bar({
