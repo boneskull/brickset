@@ -32,6 +32,13 @@ describe('BricksetClient', function () {
               thing: 'string'
             }
           },
+          manyParamsMethod: {
+            input: {
+              set: 'string',
+              count: 'int',
+              id: 'int'
+            }
+          },
           bar: {
             input: {
               userHash: 'string'
@@ -56,7 +63,8 @@ describe('BricksetClient', function () {
           port: {
             foo: sandbox.stub().returns(Q(true)),
             bar: sandbox.stub().returns(Q(true)),
-            login: sandbox.stub().returns(Q({loginResult : user_hash}))
+            login: sandbox.stub().returns(Q({loginResult : user_hash})),
+            manyParamsMethod: sandbox.stub().returns(Q(true))
           }
         }
       };
@@ -84,7 +92,8 @@ describe('BricksetClient', function () {
         expect(foo).to.have.been.calledOnce;
         expect(foo).to.have.been.calledWith({
           apiKey: params.api_key,
-          bar: 'baz'
+          bar: 'baz',
+          thing: null
         });
       });
 
@@ -111,6 +120,23 @@ describe('BricksetClient', function () {
             });
           });
       });
+
+    it('should call method with all available inputs', function () {
+      return expect(bs.manyParamsMethod({
+        name: 'filled'
+      }))
+        .to.eventually.become(true)
+        .then(function () {
+          expect(client.service.port.manyParamsMethod).to.have.been.calledOnce;
+          expect(client.service.port.manyParamsMethod).to.have.been.calledWith({
+            apiKey: params.api_key,
+            name: 'filled',
+            count: null,
+            id: null,
+            set: null
+          });
+        });
+    });
 
     it('should call the original function', function () {
       return expect(bs.bar({
