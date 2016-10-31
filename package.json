@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/boneskull/node-brickset",
   "dependencies": {
-    "lodash": "^4.16.1",
+    "lodash": "^4.16.5",
     "q": "^1.0.1",
     "request": "^2.34.0",
     "soap": "^0.17.0"
