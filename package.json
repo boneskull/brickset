@@ -40,7 +40,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-simple-mocha": "^0.4.0",
     "load-grunt-tasks": "^3.5.2",
-    "sinon": "^1.17.6",
+    "sinon": "^2.3.6",
     "sinon-chai": "^2.8.0",
     "time-grunt": "^1.4.0",
     "updtr": "^0.2.1"
